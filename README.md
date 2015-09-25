@@ -1,4 +1,4 @@
-# RSQuickstart
+# Record Service Quickstart Guide
 
 ## Prerequisites
 1. Install VirtualBox. The vm has been tested to work with VirtualBox version 4.3 on Ubuntu 14.04 and VirtualBox version 5 on OSX 10.9. Download VirtualBox for free at https://www.virtualbox.org/wiki/Downloads. VirtualBox is also included in most package managers: apt-get, brew, etc.
