@@ -41,11 +41,9 @@ The vm is not secured with LDAP or kerberos in order to make getting started pla
 ## Troubleshooting the VM Configuration
 #### Unable to Ssh to the VM
 1. Ensure that the ssh daemon is running on your machine
-2. Ensure that the RecordService vm is running. Run the command
+2. Ensure that the RecordService vm is running. Run the command below. You should see "rs-demo" listed as a running virtual machine.
 
     VBoxManage list runningvms
-
-You should see "rs-demo" listed as a running virtual machine.
 
 3. Verify that the vm's ip address is properly listed in your /etc/hosts file. In /etc/hosts you should see a line that lists an ip followed by quickstart.cloudera. You can check the vm's ip with the following command
 
