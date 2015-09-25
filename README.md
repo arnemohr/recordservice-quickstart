@@ -9,7 +9,12 @@ Naviagte to the root of the RSQuickstart git repository and run
 
     install.sh
 
-This script downloads an ova file and loads it into VirtualBox. The script might ask you for your password because it adds a line to your /etc/hosts file to give the vm a stable ip address, quickstart.cloudera. To test that the vm is running and that ip forwarding has been successfully configured, try ssh-ing to the machine with the command ssh cloudera@quickstart.cloudera. The password is cloudera. If you are unable to ssh to the vm, refer to the section below Troubleshooting the VM Configuration.
+This script downloads an ova file and loads it into VirtualBox. The script might ask you for your password because it adds a line to your /etc/hosts file to give the vm a stable ip address, quickstart.cloudera. To test that the vm is running and that ip forwarding has been successfully configured, try ssh-ing to the machine with the command
+
+    ssh cloudera@quickstart.cloudera
+    # The password is cloudera
+
+If you are unable to ssh to the vm, refer to the section below Troubleshooting the VM Configuration.
 Run
 
     source vm_env.sh
@@ -31,7 +36,7 @@ The vm is not secured with LDAP or kerberos in order to make getting started pla
 
 
 ## Troubleshooting the VM Configuration
-Unable to Ssh to the VM
+#### Unable to Ssh to the VM
 1. Ensure that the ssh daemon is running on your machine
 2. Ensure that the RecordService vm is running. Run the command
 
