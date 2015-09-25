@@ -40,13 +40,13 @@ The vm is not secured with LDAP or kerberos in order to make getting started pla
 
 ## Troubleshooting the VM Configuration
 #### Unable to Ssh to the VM
-1. Ensure that the ssh daemon is running on your machine
-2. Ensure that the RecordService vm is running. Run the command below. You should see "rs-demo" listed as a running virtual machine.
+* Ensure that the ssh daemon is running on your machine
+* Ensure that the RecordService vm is running. Run the command below. You should see "rs-demo" listed as a running virtual machine.
 ```
     VBoxManage list runningvms
 ```
-3. Verify that the vm's ip address is properly listed in your /etc/hosts file. In /etc/hosts you should see a line that lists an ip followed by quickstart.cloudera. You can check the vm's ip with the following command
+* Verify that the vm's ip address is properly listed in your /etc/hosts file. In /etc/hosts you should see a line that lists an ip followed by quickstart.cloudera. You can check the vm's ip with the following command
 ```
     VBoxManage guestproperty get rs-demo /VirtualBox/GuestInfo/Net/0/V4/IP
 ```
-4. If you've used a Cloudera quickstart vm before, it's possible that your known hosts file already has an entry for quickstart.cloudera registered to a different key. Delete any reference to quickstart.cloudera from your known hosts file, usually found in ~/.ssh/known_hosts.
+* If you've used a Cloudera quickstart vm before, it's possible that your known hosts file already has an entry for quickstart.cloudera registered to a different key. Delete any reference to quickstart.cloudera from your known hosts file, usually found in ~/.ssh/known_hosts.
