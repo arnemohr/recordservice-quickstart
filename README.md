@@ -13,6 +13,9 @@ This script downloads an ova file and loads it into VirtualBox. The script might
 
     ssh cloudera@quickstart.cloudera
     # The password is cloudera
+    logout
+    # We're just checking to make sure that we can login. Feel free to play around on the
+    # vm but the instructions below should all be executed on your host machine
 
 If you are unable to ssh to the vm, refer to the section below Troubleshooting the VM Configuration.
 Run
@@ -47,6 +50,5 @@ You should see "rs-demo" listed as a running virtual machine.
 3. Verify that the vm's ip address is properly listed in your /etc/hosts file. In /etc/hosts you should see a line that lists an ip followed by quickstart.cloudera. You can check the vm's ip with the following command
 
     VBoxManage guestproperty get rs-demo /VirtualBox/GuestInfo/Net/0/V4/IP
-
 
 4. If you've used a Cloudera quickstart vm before, it's possible that your known hosts file already has an entry for quickstart.cloudera registered to a different key. Delete any reference to quickstart.cloudera from your known hosts file, usually found in ~/.ssh/known_hosts.
