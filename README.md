@@ -50,3 +50,13 @@ The vm is not secured with LDAP or kerberos in order to make getting started pla
     VBoxManage guestproperty get rs-demo /VirtualBox/GuestInfo/Net/0/V4/IP
 ```
 * If you've used a Cloudera quickstart vm before, it's possible that your known hosts file already has an entry for quickstart.cloudera registered to a different key. Delete any reference to quickstart.cloudera from your known hosts file, usually found in ~/.ssh/known_hosts.
+
+#### Debugging the VM
+* Restarting a service: To restart a service use the standard RedHat service model 
+```
+    service <service-name> start|stop|restart
+```
+All of the installed services can be viewed in the /etc/init.d folder
+* Debugging via logs: The recordservice logs are found in /var/log/recordservice. Most service logs can be found in the /var/log directory. 
+* Dubugging via webpage: The recordservice debug page can be viewed on your host machine at the address quickstart.cloudera:11050.
+* Other service variables: To view the default execution environment for a service, looks for its file in the /etc/default directory.
