@@ -22,6 +22,7 @@ dir_resolve()
   echo "`pwd -P`"
 }
 
+: ${VIRTUALBOX_URL:=https://s3-us-west-1.amazonaws.com/recordservice-vm/rs-demo.ova}
 : ${VIRTUALBOX_NAME:=rs-demo}
 
 # VM Settings default.
@@ -35,8 +36,16 @@ if ! which VBoxManage >/dev/null ; then
   exit 1
 fi
 
-echo "Downloading the VM"
-scp vd0230.halxg.cloudera.com:/tmp/rs-demo.ova .
+# echo "Downloading the VM"
+# scp vd0230.halxg.cloudera.com:/tmp/rs-demo.ova .
+
+# Download quickstart VM
+if [ -d ${VIRTUALBOX_NAME}.ova ]; then
+  echo Using previously downloaded image
+else
+  echo "Downloading Virtualbox Image file: ${VIRTUALBOX_URL}"
+  curl -O ${VIRTUALBOX_URL}
+fi
 
 OVF=${VIRTUALBOX_NAME}.ova
 
