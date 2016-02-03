@@ -40,7 +40,7 @@ fi
 # scp vd0230.halxg.cloudera.com:/tmp/rs-demo.ova .
 
 # Download quickstart VM
-if [ -d ${VIRTUALBOX_NAME}.ova ]; then
+if [ -f ${VIRTUALBOX_NAME}.ova ]; then
   echo Using previously downloaded image
 else
   echo "Downloading Virtualbox Image file: ${VIRTUALBOX_URL}"
