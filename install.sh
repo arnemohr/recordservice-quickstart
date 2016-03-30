@@ -22,8 +22,11 @@ dir_resolve()
   echo "`pwd -P`"
 }
 
-: ${VIRTUALBOX_URL:=https://s3-us-west-1.amazonaws.com/recordservice-vm/rs-demo.ova}
-: ${VIRTUALBOX_NAME:=rs-demo}
+: ${VIRTUALBOX_URL:=https://s3-us-west-1.amazonaws.com/recordservice-vm/cloudera-quickstart-vm-5.7.0-SNAPSHOT-RS-virtualbox.zip}
+#: ${VIRTUALBOX_NAME:=rs-demo}
+: ${VIRTUALBOX_DIR_PATH:=`pwd`}
+: ${VIRTUALBOX_NAME:=cloudera-quickstart-vm-5.7.0-SNAPSHOT-RS-virtualbox}
+
 
 # VM Settings default.
 : ${VM_NAME:=rs-demo}
@@ -40,14 +43,16 @@ fi
 # scp vd0230.halxg.cloudera.com:/tmp/rs-demo.ova .
 
 # Download quickstart VM
-if [ -f ${VIRTUALBOX_NAME}.ova ]; then
+if [ -f ${VIRTUALBOX_DIR_PATH}/${VIRTUALBOX_NAME}.zip ]; then
   echo Using previously downloaded image
 else
   echo "Downloading Virtualbox Image file: ${VIRTUALBOX_URL}"
   curl -O ${VIRTUALBOX_URL}
 fi
 
-OVF=${VIRTUALBOX_NAME}.ova
+unzip ${VIRTUALBOX_DIR_PATH}/${VIRTUALBOX_NAME}.zip
+
+OVF=${VIRTUALBOX_NAME}/${VIRTUALBOX_NAME}.ovf
 
 # Create a host only network interface
 VBoxManage hostonlyif create
@@ -86,16 +91,24 @@ while true; do
     sleep 5
 done
 
+
 if ! grep -q quickstart.cloudera /etc/hosts ; then
-echo "Updating the /etc/hosts file requires sudo rights."
-sudo bash -e -c 'echo "#Cloudera Quickstart VM" >> /etc/hosts'
-sudo bash -c "echo $ip quickstart.cloudera >> /etc/hosts"
+  echo "Updating the /etc/hosts file requires sudo rights."
+  if grep -q quickstart.cloudera /etc/hosts ; then
+    # Strip out the old entry since it's probably wrong now.
+    grep -v quickstart.cloudera /etc/hosts > ./etc-hosts.new
+    sudo mv ./etc-hosts.new /etc/hosts
+  fi
+    sudo bash -e -c 'echo "#Cloudera Quickstart VM" >> /etc/hosts'
+    sudo bash -c "echo $ip quickstart.cloudera >> /etc/hosts"
 else
-echo "Hostname setup already done, check if the IP address of the VM"
-echo "matches the hosts entry."
-echo "IP VM: $ip"
-cat /etc/hosts
+  echo "Hostname setup already done, check if the IP address of the VM"
+  echo "matches the hosts entry."
+  echo "IP VM: $ip"
+  cat /etc/hosts
 fi
+
+ssh-keygen -f ~/.ssh/known_hosts -R quickstart.cloudera
 
 export RECORD_SERVICE_QUICKSTART_VM=True
 export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m "
